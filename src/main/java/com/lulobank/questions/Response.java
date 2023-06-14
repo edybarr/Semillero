@@ -15,6 +15,6 @@ public class Response  {
 }
 
     public static Question<String> getMessage(){
-        return Question.about("Get message"). answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("status").toString());
+        return Question.about("Get message"). answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("origin").toString());
     }
 }

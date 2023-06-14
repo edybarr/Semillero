@@ -34,9 +34,9 @@ public class ExecuteServicesStepDefinition {
     public static void actor(){
         OnStage.setTheStage(new Cast());
         theActorCalled("Edy");
-        ResourceBundle rb = ResourceBundle.getBundle("config", Locale.getDefault());
-        System.out.println("element1: " + rb.getString(("hello"));
-        System.out.println("elemento2: " + rb.getString("world"));
+        //ResourceBundle rb = ResourceBundle.getBundle("config", Locale.getDefault());
+        //System.out.println("element1: " + rb.getString("hello"));
+        //System.out.println("elemento2: " + rb.getString("world"));
     }
     @Before
     public static void setUpRest(){
@@ -69,25 +69,19 @@ public class ExecuteServicesStepDefinition {
 
     }
     @Then("Check if the breed exists successfully")
-    public void CheckIfTheBreedExistsSuccessfully(String resourceApi) {
+    public void CheckIfTheBreedExistsSuccessfully() {
         assertThat("The breed do not are equals",
-                theActorInTheSpotlight().asksFor(getMessage()), equalTo("success")
+                theActorInTheSpotlight().asksFor(getMessage()), equalTo("United Kingdom")
         );
     }
-    @When("Execute the method DELETE with the resource api {String}")
-    public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(deleteBreed(resourceApi));
-    }
+    //@When("Execute the method DELETE with the resource api {String}")
+    //Public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
+      //  when(theActorInTheSpotlight()).wasAbleTo(deleteBreed(resourceApi));
 
-    @Then("check if the breed was delete successfully")
-    public void checkIfTheBreedWasDeleteSuccessfully() {
-         assertThat("the employee do not match",
-              theActorInTheSpotlight().asksFor(getMessage()), equalTo("success")
-         );
-    }
 
-    @When("Execute the method ")
-
-    private Question<Object> getNameBreedCreate() {
-    }
+    //@Then("check if the breed was delete successfully")
+    //public void checkIfTheBreedWasDeleteSuccessfully() {
+      //   assertThat("the breed do not match",
+        //      theActorInTheSpotlight().asksFor(getMessage()), equalTo("success")
+         //);
 }

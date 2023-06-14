@@ -1,11 +1,22 @@
 package com.lulobank.models;
 
 public class CreateBreedRequest {
+    private String name;
 
-    private  String name;
-
-    public void setName(String name) {
+    public String getName() {
+        return name;
     }
-
-    private String
+    public void setName(String name) {
+        this.name = name;
+    }
 }
+
+
+
+
+
+
+
+
+
+

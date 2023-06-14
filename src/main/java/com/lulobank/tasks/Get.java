@@ -25,7 +25,7 @@ public class Get implements Task {
                     .then().extract().response();
         } else {
             given().
-                    and().when().get("resourceApi"+"/"+ID_BREED)
+                    and().when().get(resourceApi+"s/"+"drex")
                     .then().extract().response();
         }
     }

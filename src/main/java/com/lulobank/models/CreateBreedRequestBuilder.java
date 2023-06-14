@@ -14,8 +14,4 @@ public class CreateBreedRequestBuilder {
         this.breedRequest.setName(name);
         return this;
     }
-
-    public CreateBreedRequestBuilder with
-        this.breedRequest.setName();
-    return this;
 }
