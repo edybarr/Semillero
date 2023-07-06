@@ -1,10 +1,6 @@
 package com.lulobank.factory;
 
 import com.github.javafaker.Faker;
-import com.lulobank.models.CreateBreedRequest;
-import org.apache.commons.lang3.StringUtils;
-
-import static com.lulobank.models.CreateBreedRequestBuilder.aBreed;
 
 public class CreateBreedDataFactory {
 

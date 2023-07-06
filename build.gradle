@@ -52,6 +52,7 @@ dependencies {
 test {
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
+    //Esta parte nos permite imprimir al detalle los resultados y traer todas las variables de entorno del equipo
 }
 
 //Cuando un test falle la prueba no pare si no continue

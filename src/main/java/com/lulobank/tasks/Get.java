@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.thucydides.core.annotations.Step;
 
-import static com.lulobank.factory.CreateBreedDataFactory.ID_BREED;
 import static net.serenitybdd.rest.SerenityRest.given;
 
 public class Get implements Task {
