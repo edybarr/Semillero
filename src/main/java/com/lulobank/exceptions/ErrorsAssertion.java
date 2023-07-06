@@ -12,4 +12,7 @@ public class ErrorsAssertion extends AssertionError{
 
     public static final String THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY = "The votes do not are created successfully";
 
+    public static final String THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY = "The vote has not been delete successfully";
+
+
 }

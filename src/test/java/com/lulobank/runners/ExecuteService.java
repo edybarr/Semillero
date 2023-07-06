@@ -15,7 +15,8 @@ import org.junit.runner.RunWith;
         //tags = "@GetBreeds",
         //tags = "@GetAnBreed",
         //tags = "@GetCategories",
-        tags = "@DeleteVote",
+        tags = "@DeleteVote or @UHPDeleteVote",
+        //tags = "@UHPDeleteVote",
         //tags = "@PostVote",
         snippets = SnippetType.CAMELCASE,
         monochrome = true

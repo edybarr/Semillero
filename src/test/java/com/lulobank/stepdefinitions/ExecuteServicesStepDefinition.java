@@ -28,11 +28,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 
 public class ExecuteServicesStepDefinition {
 
-
-    private static final String THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY = "The vote was not created successfully";
-
-    private String deleteResponseMessage;
-
     @Before
     public static void actor() {
         OnStage.setTheStage(new Cast());
@@ -97,14 +92,7 @@ public class ExecuteServicesStepDefinition {
         theActorInTheSpotlight().attemptsTo(
                 executeDeleteMethodWithThe(resourceApi)
         );
-        deleteResponseMessage = SerenityRest.then().extract().path("message");
     }
-
-    @Then("Check if the vote was delete successfully")
-    public void checkIfTheVoteWasDeleteSuccessfully() {
-        assertThat(deleteResponseMessage, equalTo("success"));
-    }
-
 
     @When("Execute the method POST with the resource api {string}")
     public void executeTheMethodPOSTWithTheResourceApi(String resourceApi) {
@@ -114,6 +102,18 @@ public class ExecuteServicesStepDefinition {
     @Then("Check if the vote was create successfully")
     public void checkIfTheVoteWasCreateSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
+                theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
+    }
+        @Then("Code returned is {int}")
+        public void codeReturned (Integer statusCode) {
+            assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
+                    theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode));
+
+    }
+
+    @Then("Check if the vote was delete successfully")
+    public void checkIfTheVoteWasDeleteSuccessfully() {
+        assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
 
