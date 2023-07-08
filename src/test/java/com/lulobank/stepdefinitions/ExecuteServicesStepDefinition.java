@@ -1,5 +1,8 @@
 package com.lulobank.stepdefinitions;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.github.javafaker.Faker;
+import com.lulobank.models.VoteID;
 import com.lulobank.tasks.GetCategories;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -10,15 +13,19 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
-import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Collections;
+import java.util.List;
 
 import static com.lulobank.exceptions.ErrorsAssertion.*;
 import static com.lulobank.questions.Response.*;
 import static com.lulobank.tasks.DeleteVote.executeDeleteMethodWithThe;
 import static com.lulobank.tasks.Get.executeGetMethodWithThe;
+import static com.lulobank.tasks.GetVotes.executeGetVoteMethodWithThe;
 import static com.lulobank.tasks.PostVote.applyVote;
 import static net.serenitybdd.screenplay.GivenWhenThen.*;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -61,6 +68,9 @@ public class ExecuteServicesStepDefinition {
         when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi));
     }
 
+
+
+
     @Then("see that the is returned {int}")
     public void seeThatTheIsReturned(Integer statusCode) {
         assertThat(THE_CODES_DO_NOT_MATCH,
@@ -75,8 +85,9 @@ public class ExecuteServicesStepDefinition {
         );
     }
 
-    @When("Execute method GET with the resource api {string}")
-    public void executeMethodGETWithTheResourceApi(String resourceApi) {
+    //GetCategories
+    @When("Execute method GET categories with the resource api {string}")
+    public void executeMethodGETCategoriesWithTheResourceApi(String resourceApi) {
         when(theActorInTheSpotlight()).wasAbleTo(GetCategories.with(resourceApi));
     }
 
@@ -87,12 +98,31 @@ public class ExecuteServicesStepDefinition {
         );
     }
 
+    @When("Execute the method GET vote with the resource api {string}")
+    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
+    }
+
+    @When("Execute the method GET vote with a voteID the resource api {string} and ID {string}")
+    public void executeTheMethodGETVoteWithVoteIDTheResourceApi(String resourceApi, String voteID) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, voteID));
+    }
+
     @When("Execute the method DELETE with the resource api {string}")
     public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
         theActorInTheSpotlight().attemptsTo(
                 executeDeleteMethodWithThe(resourceApi)
         );
     }
+
+    @When("Save a random vote")
+    public void saveARandomVote()  {
+        List<VoteID> listVoteID = theActorInTheSpotlight().asksFor(getVotes());
+        Faker FAKER = new Faker();
+        VoteID idVote = listVoteID.get(FAKER.random().nextInt(0, listVoteID.size()-1));
+        theActorInTheSpotlight().remember("ID_VOTE", idVote.getID());
+    }
+
 
     @When("Execute the method POST with the resource api {string}")
     public void executeTheMethodPOSTWithTheResourceApi(String resourceApi) {
@@ -104,6 +134,13 @@ public class ExecuteServicesStepDefinition {
         assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
+
+    @Then("Save the vote ID was create successfully")
+    public void saveTheVoteIDWasCreateSuccessfully() {
+        assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
+                theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
+    }
+
         @Then("Code returned is {int}")
         public void codeReturned (Integer statusCode) {
             assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
@@ -116,5 +153,6 @@ public class ExecuteServicesStepDefinition {
         assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
+
 
 }

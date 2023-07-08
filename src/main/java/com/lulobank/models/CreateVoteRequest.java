@@ -26,4 +26,8 @@ public class CreateVoteRequest {
     public void setValue(String value) {
         this.value = value;
     }
+
+
+
+
 }

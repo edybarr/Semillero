@@ -8,8 +8,7 @@ public class CreateVoteDataFactory {
 
     private static final Faker FAKER = new Faker();
 
-    public static final String ID_VOTE = "1071758";
-
+    public static final String ID_VOTE = "1071899";
     //public static final String ID_VOTE = String.valueOf(FAKER.random().nextInt(1,7));
 
     public static final String  IMAGE_ID = "9ccXTANkb";

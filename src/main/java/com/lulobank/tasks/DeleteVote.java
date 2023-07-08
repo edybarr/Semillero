@@ -24,7 +24,8 @@ public class DeleteVote implements Task {
     public <T extends Actor> void performAs(T actor) {
         given()
                 .header(X_API_KEY,API_KEY)
-                .and().when().delete(resourceApi + "/" + ID_VOTE)
+                .and().when().delete(resourceApi + "/" +
+                        actor.recall("ID_VOTE"))
                 .then().extract().response();
     }
     public static DeleteVote executeDeleteMethodWithThe(String resourceApi){
