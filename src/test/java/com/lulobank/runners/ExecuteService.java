@@ -12,17 +12,20 @@ import org.junit.runner.RunWith;
         plugin = {"pretty", "html:target/cucumber"},
         glue = "com.lulobank.stepdefinitions",
         tags = "@services",
-        //tags =  "@GetVote",
-        //tags = " @GetVotes",
         //tags = "@GetBreeds",
         //tags = "@GetAnBreed",
+        //tags = "@GetBreeds or @GetAnBreed",
         //tags = "@GetCategories",
-        //tags = "@DeleteVote or @UHPDeleteVote or @GetBreeds or @GetAnBreed or @GetCategories",
         //tags = "@GetBreeds or @GetAnBreed or @GetCategories",
+        //tags =  "@GetVote",
+        //tags = " @GetVotes",
         //tags = "@PostVote or @DeleteVote",
         //tags = "@PostVote or @DeleteVote or @UHPDeleteVote
         //tags = "@UHPDeleteVote",
         //tags = "@PostVote",
+        //tags = "@DeleteCreatedVote",
+        //tags = "@GetVotes or @GetVote or PostVote or DeleteVote or @DeleteVoteCreado or @UHPDeleteVote",
+        //tags = "@DeleteVote or @UHPDeleteVote or @GetBreeds or @GetAnBreed or @GetCategories",
         snippets = SnippetType.CAMELCASE,
         monochrome = true
 

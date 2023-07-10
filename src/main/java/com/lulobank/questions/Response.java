@@ -22,7 +22,7 @@ public class Response {
     }
 
     public static Question<String> getNameBred() {
-        return Question.about("Get name breed").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("data.breed_name").toString());
+        return Question.about("Get name breed").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("name").toString());
     }
 
     public static Question<String> getMessage() {
@@ -34,8 +34,8 @@ public class Response {
 
     }
 
-    public static Question<Integer> deleteStatusCode() {
-        return Question.about("Status code").answeredBy(actor -> SerenityRest.lastResponse().statusCode());
+    public static Question<String> edyGetVoteID() {
+        return Question.about("Get Id Vote").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("id").toString());
     }
     //public static Question<String> deleteMessage(){
     //return Question.about("Delete message"). answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).deleteList("id").toString());

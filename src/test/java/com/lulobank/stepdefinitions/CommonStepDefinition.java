@@ -1,9 +1,5 @@
 package com.lulobank.stepdefinitions;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.javafaker.Faker;
-import com.lulobank.models.VoteID;
-import com.lulobank.tasks.GetCategories;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,10 +12,6 @@ import io.restassured.http.ContentType;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.Collections;
-import java.util.List;
 
 import static com.lulobank.exceptions.ErrorsAssertion.*;
 import static com.lulobank.questions.Response.*;
@@ -27,13 +19,14 @@ import static com.lulobank.tasks.DeleteVote.executeDeleteMethodWithThe;
 import static com.lulobank.tasks.Get.executeGetMethodWithThe;
 import static com.lulobank.tasks.GetVotes.executeGetVoteMethodWithThe;
 import static com.lulobank.tasks.PostVote.applyVote;
-import static net.serenitybdd.screenplay.GivenWhenThen.*;
+import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
+import static net.serenitybdd.screenplay.GivenWhenThen.when;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ExecuteServicesStepDefinition {
+public class CommonStepDefinition {
 
     @Before
     public static void actor() {
@@ -54,58 +47,19 @@ public class ExecuteServicesStepDefinition {
                 .setRelaxedHTTPSValidation()
                 .build();
     }
-
     @Given("I make the connection to the api")
     public void iMakeTheConnectionToTheApi() {
-        // Write code here that turns the phrase above into concrete actions
-        ;
         givenThat(theActorCalled("Edy").whoCan(CallAnApi.at("/")));
-
     }
-
-    @When("Execute the method GET with the resource api {string}")
-    public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi));
+    @When("Execute the method GET vote with the resource api {string}")
+    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
     }
-
-
-
-
     @Then("see that the is returned {int}")
     public void seeThatTheIsReturned(Integer statusCode) {
         assertThat(THE_CODES_DO_NOT_MATCH,
                 theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode)
         );
-    }
-
-    @Then("Check if the breed exists successfully")
-    public void CheckIfTheBreedExistsSuccessfully() {
-        assertThat(THE_BREED_DOES_NOT_IS_EQUAL,
-                theActorInTheSpotlight().asksFor(getMessage()), equalTo("United Kingdom")
-        );
-    }
-
-    //GetCategories
-    @When("Execute method GET categories with the resource api {string}")
-    public void executeMethodGETCategoriesWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(GetCategories.with(resourceApi));
-    }
-
-    @Then("Check if the categories exists successfully")
-    public void CheckIfTheCategoriesExistsSuccessfully() {
-        assertThat(THE_CATEGORIES_DO_NOT_ARE_EQUALS,
-                theActorInTheSpotlight().asksFor(getNameCategories()), equalTo("15")
-        );
-    }
-
-    @When("Execute the method GET vote with the resource api {string}")
-    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
-    }
-
-    @When("Execute the method GET vote with a voteID the resource api {string} and ID {string}")
-    public void executeTheMethodGETVoteWithVoteIDTheResourceApi(String resourceApi, String voteID) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, voteID));
     }
 
     @When("Execute the method DELETE with the resource api {string}")
@@ -115,28 +69,12 @@ public class ExecuteServicesStepDefinition {
         );
     }
 
-    @When("Save a random vote")
-    public void saveARandomVote()  {
-        List<VoteID> listVoteID = theActorInTheSpotlight().asksFor(getVotes());
-        Faker FAKER = new Faker();
-        VoteID idVote = listVoteID.get(FAKER.random().nextInt(0, listVoteID.size()-1));
-        theActorInTheSpotlight().remember("ID_VOTE", idVote.getID());
-    }
-
-
     @When("Execute the method POST with the resource api {string}")
     public void executeTheMethodPOSTWithTheResourceApi(String resourceApi) {
         when(theActorInTheSpotlight()).wasAbleTo(applyVote(resourceApi));
     }
-
     @Then("Check if the vote was create successfully")
     public void checkIfTheVoteWasCreateSuccessfully() {
-        assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
-                theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
-    }
-
-    @Then("Save the vote ID was create successfully")
-    public void saveTheVoteIDWasCreateSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
@@ -145,13 +83,17 @@ public class ExecuteServicesStepDefinition {
         public void codeReturned (Integer statusCode) {
             assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                     theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode));
-
     }
-
     @Then("Check if the vote was delete successfully")
     public void checkIfTheVoteWasDeleteSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
+    }
+
+
+    @When("Execute the method GET with the resource api {string}")
+    public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi));
     }
 
 
