@@ -9,7 +9,6 @@ public class CreateVoteRequestBuilder {
     }
     public static CreateVoteRequestBuilder aVote() {
         return new CreateVoteRequestBuilder();
-
     }
 
     public CreateVoteRequestBuilder withImage_id(String image_id) {

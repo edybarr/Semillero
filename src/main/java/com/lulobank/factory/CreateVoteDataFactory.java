@@ -3,13 +3,7 @@ package com.lulobank.factory;
 import com.github.javafaker.Faker;
 import com.lulobank.models.CreateVoteRequest;
 import static com.lulobank.models.CreateVoteRequestBuilder.aVote;
-
 public class CreateVoteDataFactory {
-
-    private static final Faker FAKER = new Faker();
-
-    public static final String VoteID = "1071899";
-    //public static final String ID_VOTE = String.valueOf(FAKER.random().nextInt(1,7));
 
     public static final String  IMAGE_ID = "9ccXTANkb";
 
