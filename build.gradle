@@ -49,7 +49,12 @@ dependencies {
 
 }
 
+tasks.register('cleanReport', Delete) {
+    delete "${projectDir}/target/site/serenity"
+}
+
 test {
+    dependsOn cleanReport
     testLogging.showStandardStreams = true
     systemProperties System.getProperties()
     //Esta parte nos permite imprimir al detalle los resultados y traer todas las variables de entorno del equipo

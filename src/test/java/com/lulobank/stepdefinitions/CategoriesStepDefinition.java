@@ -13,7 +13,7 @@ import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 
 import static com.lulobank.exceptions.ErrorsAssertion.THE_CATEGORIES_DO_NOT_ARE_EQUALS;
-import static com.lulobank.questions.Response.getNameCategories;
+import static com.lulobank.questions.Response.getNameCategory;
 import static net.serenitybdd.screenplay.GivenWhenThen.when;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
@@ -27,9 +27,8 @@ public class CategoriesStepDefinition {
     }
     @Then("Check if the categories exists successfully")
     public void CheckIfTheCategoriesExistsSuccessfully() {
-        assertThat(THE_CATEGORIES_DO_NOT_ARE_EQUALS,
-                theActorInTheSpotlight().asksFor(getNameCategories()), equalTo("15")
-        );
-    }
+    assertThat(THE_CATEGORIES_DO_NOT_ARE_EQUALS,
+    theActorInTheSpotlight().asksFor(getNameCategory()), equalTo("15")
+);}
 
 }

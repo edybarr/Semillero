@@ -16,7 +16,7 @@ import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import static com.lulobank.exceptions.ErrorsAssertion.*;
 import static com.lulobank.questions.Response.*;
 import static com.lulobank.tasks.DeleteVote.executeDeleteMethodWithThe;
-import static com.lulobank.tasks.Get.executeGetMethodWithThe;
+import static com.lulobank.tasks.GetBreed.executeGetMethodWithThe;
 import static com.lulobank.tasks.GetVotes.executeGetVoteMethodWithThe;
 import static com.lulobank.tasks.PostVote.applyVote;
 import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
@@ -32,9 +32,6 @@ public class CommonStepDefinition {
     public static void actor() {
         OnStage.setTheStage(new Cast());
         theActorCalled("Edy");
-        //ResourceBundle rb = ResourceBundle.getBundle("config", Locale.getDefault());
-        //System.out.println("element1: " + rb.getString("hello"));
-        //System.out.println("elemento2: " + rb.getString("world"));
     }
 
     @Before
@@ -90,11 +87,13 @@ public class CommonStepDefinition {
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
 
-
-    @When("Execute the method GET with the resource api {string}")
+    @When("Execute the method GET with resource api {string}")
     public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi));
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi,""));
     }
 
-
+    @When("I Execute the method GET with the {string} and the resource api {string}")
+    public void executeTheMethodGETWithTheResourceApi(String breed, String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi, breed));
+    }
 }

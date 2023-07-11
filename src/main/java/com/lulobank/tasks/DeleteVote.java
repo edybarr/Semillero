@@ -4,8 +4,6 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.thucydides.core.annotations.Step;
-
-import static com.lulobank.factory.CreateVoteDataFactory.ID_VOTE;
 import static com.lulobank.utils.Constants.API_KEY;
 import static com.lulobank.utils.Constants.X_API_KEY;
 import static net.serenitybdd.rest.SerenityRest.given;

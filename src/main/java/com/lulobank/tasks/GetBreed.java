@@ -7,12 +7,14 @@ import net.thucydides.core.annotations.Step;
 
 import static net.serenitybdd.rest.SerenityRest.given;
 
-public class Get implements Task {
+public class GetBreed implements Task {
 
     private String resourceApi;
+    private String breed;
 
-    public Get(String resourceApi) {
+    public GetBreed(String resourceApi, String breed) {
         this.resourceApi = resourceApi;
+        this.breed = breed;
     }
 
     @Step("{0} consume get method")
@@ -24,13 +26,14 @@ public class Get implements Task {
                     .then().extract().response();
         } else {
             given().
-                    and().when().get(resourceApi+"s/"+"drex")
+                   //and().when().get(resourceApi+"s/"+"drex")
+                           and().when().get(resourceApi+"s/"+ breed)
                     .then().extract().response();
         }
     }
 
-        public static Get executeGetMethodWithThe (String resourceApi){
-            return Tasks.instrumented(Get.class, resourceApi);
+        public static GetBreed executeGetMethodWithThe (String resourceApi, String breed){
+            return Tasks.instrumented(GetBreed.class, resourceApi, breed);
         }
     }
 
