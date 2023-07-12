@@ -2,21 +2,21 @@
 Feature: Make request to a service
 
   @GetCategories
-  Scenario: Make Request to method Get for consult Categories
+  Scenario: Consult Categories using the GET Method
     Given I make the connection to the api
     When Execute method GET categories with the resource api "categories"
     Then see that the is returned 200
 
 
   @GetCategory
-  Scenario: Make Request to method Get for consult an Category
+  Scenario: Consult a Category using the GET Method
     Given I make the connection to the api
     When Execute method GET categories with the resource api "categories"
     Then see that the is returned 200
     And Check if the categories exists successfully
 
-  @GetTwoCategories
-  Scenario: Make Request to method Get for consult Categories
+  @GetCategorieslimit
+  Scenario: Consult Categories using the GET Method with Limit 2
     Given I make the connection to the api
     When Execute method GET categories with the resource api "categories?limit=2"
     Then see that the is returned 200
