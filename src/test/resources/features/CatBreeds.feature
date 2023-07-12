@@ -2,13 +2,13 @@
 Feature: Make request to a service
 
   @GetBreeds
-  Scenario: Make request to method Get for consult the cat breeds
+  Scenario: Requesting Cat Breeds using the GET method
     Given I make the connection to the api
     When Execute the method GET with resource api "breeds"
     Then see that the is returned 200
 
  @GetAnBreed
-Scenario Outline: Make Request to method Get for consulting a Breed
+Scenario Outline: Requesting a Specific Breed using the GET method
    Given I make the connection to the api
    When I Execute the method GET with the <breed> and the resource api "breed"
    Then see that the is returned 200

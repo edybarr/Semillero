@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Response {
 
+    public static Question<String> getMessage() {
+        return Question.about("GetBreed message").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("origin").toString());
+    }
+
     public static Question<Integer> getStatusCode() {
         return Question.about("Status code").answeredBy(actor -> SerenityRest.lastResponse().statusCode());
     }
@@ -23,10 +27,6 @@ public class Response {
 
     public static Question<String> getNameBred() {
         return Question.about("GetBreed name breed").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("name").toString());
-    }
-
-    public static Question<String> getMessage() {
-        return Question.about("GetBreed message").answeredBy(actor -> JsonPath.from(SerenityRest.lastResponse().body().asString()).get("origin").toString());
     }
 
     public static Question<String> getNameCategory() {

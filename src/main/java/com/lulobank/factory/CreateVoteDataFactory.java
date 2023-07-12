@@ -1,6 +1,5 @@
 package com.lulobank.factory;
 
-import com.github.javafaker.Faker;
 import com.lulobank.models.CreateVoteRequest;
 import static com.lulobank.models.CreateVoteRequestBuilder.aVote;
 public class CreateVoteDataFactory {

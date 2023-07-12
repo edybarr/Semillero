@@ -48,9 +48,9 @@ public class CommonStepDefinition {
     public void iMakeTheConnectionToTheApi() {
         givenThat(theActorCalled("Edy").whoCan(CallAnApi.at("/")));
     }
-    @When("Execute the method GET vote with the resource api {string}")
-    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
+    @When("Execute the method GET with resource api {string}")
+    public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
+    when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi,""));
     }
     @Then("see that the is returned {int}")
     public void seeThatTheIsReturned(Integer statusCode) {
@@ -59,13 +59,15 @@ public class CommonStepDefinition {
         );
     }
 
-    @When("Execute the method DELETE with the resource api {string}")
-    public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
-        theActorInTheSpotlight().attemptsTo(
-                executeDeleteMethodWithThe(resourceApi)
-        );
+    @When("I Execute the method GET with the {string} and the resource api {string}")
+    public void executeTheMethodGETWithTheResourceApi(String breed, String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi, breed));
     }
 
+    @When("Execute the method GET vote with the resource api {string}")
+    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
+        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
+    }
     @When("Execute the method POST with the resource api {string}")
     public void executeTheMethodPOSTWithTheResourceApi(String resourceApi) {
         when(theActorInTheSpotlight()).wasAbleTo(applyVote(resourceApi));
@@ -76,6 +78,12 @@ public class CommonStepDefinition {
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
 
+    @When("Execute the method DELETE with the resource api {string}")
+    public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
+        theActorInTheSpotlight().attemptsTo(
+                executeDeleteMethodWithThe(resourceApi)
+        );
+    }
         @Then("Code returned is {int}")
         public void codeReturned (Integer statusCode) {
             assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
@@ -85,15 +93,5 @@ public class CommonStepDefinition {
     public void checkIfTheVoteWasDeleteSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
-    }
-
-    @When("Execute the method GET with resource api {string}")
-    public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi,""));
-    }
-
-    @When("I Execute the method GET with the {string} and the resource api {string}")
-    public void executeTheMethodGETWithTheResourceApi(String breed, String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi, breed));
     }
 }

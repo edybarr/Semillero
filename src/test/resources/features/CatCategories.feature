@@ -15,7 +15,6 @@ Feature: Make request to a service
     Then see that the is returned 200
     And Check if the categories exists successfully
 
-
   @GetTwoCategories
   Scenario: Make Request to method Get for consult Categories
     Given I make the connection to the api

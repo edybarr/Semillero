@@ -10,6 +10,7 @@ import static com.lulobank.tasks.GetVotes.executeGetVoteMethodWithThe;
 import static net.serenitybdd.screenplay.GivenWhenThen.when;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
+
 public class VotesStepDefinition {
 
     @When("Execute the method GET vote with a voteID the resource api {string} and ID {string}")
