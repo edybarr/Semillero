@@ -2,21 +2,21 @@
 Feature: Make request to a service
 
   @GetCategories
-  Scenario: Consult Categories using the GET Method
-    Given I make the connection to the api
-    When Execute method GET categories with the resource api "categories"
-    Then see that the is returned 200
+  Scenario: Consultar categorías usando el método
+    Given Que se especifica un entorno de prueba
+    When Ejecuta el método GET para obtener las categorías con el recurso "categories"
+    Then Valida que retorna el código 200
 
 
   @GetCategory
-  Scenario: Consult a Category using the GET Method
-    Given I make the connection to the api
-    When Execute method GET categories with the resource api "categories"
-    Then see that the is returned 200
-    And Check if the categories exists successfully
+  Scenario: Consultar una  Categoría usando el método
+    Given Que se especifica un entorno de prueba
+    When Ejecuta el método GET para obtener las categorías con el recurso "categories"
+    Then Valida que retorna el código 200
+    And Verifica la categoría se consultó correctamente
 
   @GetCategorieslimit
-  Scenario: Consult Categories using the GET Method with Limit 2
-    Given I make the connection to the api
-    When Execute method GET categories with the resource api "categories?limit=2"
-    Then see that the is returned 200
+  Scenario: Consultar Categorías usando el método con límite 2
+    Given Que se especifica un entorno de prueba
+    When Ejecuta el método GET para obtener las categorías con el recurso "categories?limit=2"
+    Then Valida que retorna el código 200

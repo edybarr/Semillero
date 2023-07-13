@@ -12,13 +12,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CategoriesStepDefinition {
-    @When("Execute method GET categories with the resource api {string}")
+    @When("Ejecuta el método GET para obtener las categorías con el recurso {string}")
     public void executeMethodGETCategoriesWithTheResourceApi(String resourceApi) {
         when(theActorInTheSpotlight()).wasAbleTo(GetCategories.with(resourceApi));
     }
-    @Then("Check if the categories exists successfully")
+
+    @Then("Verifica la categoría se consultó correctamente")
     public void CheckIfTheCategoriesExistsSuccessfully() {
-    assertThat(THE_CATEGORIES_DO_NOT_ARE_EQUALS,
-    theActorInTheSpotlight().asksFor(getNameCategory()), equalTo("15"));
+        assertThat(THE_CATEGORIES_DO_NOT_ARE_EQUALS,
+                theActorInTheSpotlight().asksFor(getNameCategory()), equalTo("15"));
     }
 }

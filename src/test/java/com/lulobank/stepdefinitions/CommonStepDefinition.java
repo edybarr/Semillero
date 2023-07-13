@@ -3,7 +3,6 @@ package com.lulobank.stepdefinitions;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -14,13 +13,9 @@ import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 
 import static com.lulobank.exceptions.ErrorsAssertion.*;
-import static com.lulobank.questions.Response.*;
-import static com.lulobank.tasks.DeleteVote.executeDeleteMethodWithThe;
-import static com.lulobank.tasks.GetBreed.executeGetMethodWithThe;
-import static com.lulobank.tasks.GetVotes.executeGetVoteMethodWithThe;
-import static com.lulobank.tasks.PostVote.applyVote;
+import static com.lulobank.questions.Response.getMessageVote;
+import static com.lulobank.questions.Response.getStatusCode;
 import static net.serenitybdd.screenplay.GivenWhenThen.givenThat;
-import static net.serenitybdd.screenplay.GivenWhenThen.when;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -44,52 +39,32 @@ public class CommonStepDefinition {
                 .setRelaxedHTTPSValidation()
                 .build();
     }
-    @Given("I make the connection to the api")
-    public void iMakeTheConnectionToTheApi() {
+
+    @Given("Que se especifica un entorno de prueba")
+    public void MakeTheConnectionToTheApi() {
         givenThat(theActorCalled("Edy").whoCan(CallAnApi.at("/")));
     }
-    @When("Execute the method GET with resource api {string}")
-    public void executeTheMethodGETWithTheResourceApi(String resourceApi) {
-    when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi,""));
-    }
-    @Then("see that the is returned {int}")
+
+    @Then("Valida que retorna el código {int}")
     public void seeThatTheIsReturned(Integer statusCode) {
         assertThat(THE_CODES_DO_NOT_MATCH,
                 theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode)
         );
     }
 
-    @When("I Execute the method GET with the {string} and the resource api {string}")
-    public void executeTheMethodGETWithTheResourceApi(String breed, String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetMethodWithThe(resourceApi, breed));
+    @Then("Valida que retorna código {int}")
+    public void codeReturned(Integer statusCode) {
+        assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
+                theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode));
     }
 
-    @When("Execute the method GET vote with the resource api {string}")
-    public void executeTheMethodGETVoteWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(executeGetVoteMethodWithThe(resourceApi, ""));
-    }
-    @When("Execute the method POST with the resource api {string}")
-    public void executeTheMethodPOSTWithTheResourceApi(String resourceApi) {
-        when(theActorInTheSpotlight()).wasAbleTo(applyVote(resourceApi));
-    }
-    @Then("Check if the vote was create successfully")
+    @Then("Verifica si el voto se creó correctamente")
     public void checkIfTheVoteWasCreateSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_CREATED_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));
     }
 
-    @When("Execute the method DELETE with the resource api {string}")
-    public void executeTheMethodDELETEWithTheResourceApi(String resourceApi) {
-        theActorInTheSpotlight().attemptsTo(
-                executeDeleteMethodWithThe(resourceApi)
-        );
-    }
-        @Then("Code returned is {int}")
-        public void codeReturned (Integer statusCode) {
-            assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
-                    theActorInTheSpotlight().asksFor(getStatusCode()), equalTo(statusCode));
-    }
-    @Then("Check if the vote was delete successfully")
+    @Then("Verifica si el voto fue borrado correctamente")
     public void checkIfTheVoteWasDeleteSuccessfully() {
         assertThat(THE_VOTE_WAS_NOT_DELETE_SUCCESSFULLY,
                 theActorInTheSpotlight().asksFor(getMessageVote()), equalTo("SUCCESS"));

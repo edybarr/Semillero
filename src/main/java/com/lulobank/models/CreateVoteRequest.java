@@ -1,4 +1,5 @@
 package com.lulobank.models;
+
 public class CreateVoteRequest {
 
     private String image_id;

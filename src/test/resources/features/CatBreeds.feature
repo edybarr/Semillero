@@ -2,20 +2,20 @@
 Feature: Make request to a service
 
   @GetBreeds
-  Scenario: Requesting Cat Breeds using the GET method
-    Given I make the connection to the api
-    When Execute the method GET with resource api "breeds"
-    Then see that the is returned 200
+  Scenario: Requerir razas usando el método Get
+    Given Que se especifica un entorno de prueba
+    When Ejecutar método con el recurso "breeds"
+    Then Valida que retorna el código 200
 
- @GetAnBreed
-Scenario Outline: Requesting a Specific Breed using the GET method
-   Given I make the connection to the api
-   When I Execute the method GET with the <breed> and the resource api "breed"
-   Then see that the is returned 200
-   And Check if the breed exists successfully
-  Examples:
-    |breed        |
-    |"toyg"       |
-    |"snow"       |
-    |"abob"       |
-    |"beng"       |
+  @GetAnBreed
+  Scenario Outline: Requerir una raza específica usando el método
+    Given Que se especifica un entorno de prueba
+    When Ejecutar el método con la <breed> y el recurso api "breed"
+    Then Valida que retorna el código 200
+    And Confirmar la raza se obtiene correctamente
+    Examples:
+      | breed  |
+      | "toyg" |
+      | "snow" |
+      | "abob" |
+      | "beng" |

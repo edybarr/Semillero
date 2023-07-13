@@ -9,8 +9,8 @@ import static net.serenitybdd.rest.SerenityRest.given;
 
 public class GetBreed implements Task {
 
-    private String resourceApi;
-    private String breed;
+    private final String resourceApi;
+    private final String breed;
 
     public GetBreed(String resourceApi, String breed) {
         this.resourceApi = resourceApi;
@@ -26,16 +26,16 @@ public class GetBreed implements Task {
                     .then().extract().response();
         } else {
             given().
-                   //and().when().get(resourceApi+"s/"+"drex")
-                           and().when().get(resourceApi+"s/"+ breed)
+                    //and().when().get(resourceApi+"s/"+"drex")
+                            and().when().get(resourceApi + "s/" + breed)
                     .then().extract().response();
         }
     }
 
-        public static GetBreed executeGetMethodWithThe (String resourceApi, String breed){
-            return Tasks.instrumented(GetBreed.class, resourceApi, breed);
-        }
+    public static GetBreed executeGetMethodWithThe(String resourceApi, String breed) {
+        return Tasks.instrumented(GetBreed.class, resourceApi, breed);
     }
+}
 
 
 

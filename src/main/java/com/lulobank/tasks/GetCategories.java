@@ -11,6 +11,7 @@ public class GetCategories implements Task {
     public GetCategories(String resourceApi) {
         this.resourceApi = resourceApi;
     }
+
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
@@ -19,6 +20,7 @@ public class GetCategories implements Task {
                         )
         );
     }
+
     public static GetCategories with(String resourceApi) {
         return new GetCategories(resourceApi);
     }

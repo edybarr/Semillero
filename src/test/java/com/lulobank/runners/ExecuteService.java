@@ -3,7 +3,6 @@ package com.lulobank.runners;
 import io.cucumber.junit.CucumberOptions;
 import io.cucumber.junit.CucumberOptions.SnippetType;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
-import org.checkerframework.framework.qual.PostconditionAnnotation;
 import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
@@ -31,7 +30,6 @@ import org.junit.runner.RunWith;
         //tags = "@DeleteVote or @UHPDeleteVote or @GetBreeds or @GetAnBreed or @GetCategories",
         snippets = SnippetType.CAMELCASE,
         monochrome = true
-
 )
 public class ExecuteService {
 }

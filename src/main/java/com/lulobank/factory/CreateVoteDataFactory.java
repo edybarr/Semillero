@@ -1,12 +1,14 @@
 package com.lulobank.factory;
 
 import com.lulobank.models.CreateVoteRequest;
+
 import static com.lulobank.models.CreateVoteRequestBuilder.aVote;
+
 public class CreateVoteDataFactory {
 
-    public static final String  IMAGE_ID = "9ccXTANkb";
+    public static final String IMAGE_ID = "9ccXTANkb";
 
-    public static final String  SUB_ID = "my-user-1234";
+    public static final String SUB_ID = "my-user-1234";
 
     public static final String VALUE = "1";
 
@@ -19,5 +21,5 @@ public class CreateVoteDataFactory {
                 .withValue(VALUE)
                 .build();
     }
-    }
+}
 

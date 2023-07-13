@@ -2,47 +2,47 @@
 Feature: Make request to a service
 
   @GetVotes
-  Scenario: Retrieve Cat Votes using the GET Method
-    Given I make the connection to the api
-    When Execute the method GET vote with the resource api "votes"
-    Then see that the is returned 200
+  Scenario: Obtener votos a través de la APICat
+    Given Que se especifica un entorno de prueba
+    When Se ejecuta el método para obtener los votos en la APICAT con el recurso "votes"
+    Then Valida que retorna el código 200
 
   @GetVote
-  Scenario: Retrieve Cat Votes using the GET Method with a specific Vote ID
-    Given I make the connection to the api
-    When Execute the method GET vote with a voteID the resource api "votes" and ID "1071900"
-    Then see that the is returned 200
+  Scenario: Obtener voto específico a través de la APICat
+    Given Que se especifica un entorno de prueba
+    When Se ejecuta el método para obtener un voto específico en la APICAT con el recurso "votes" y ID "1071900"
+    Then Valida que retorna el código 200
 
   @PostVote
-  Scenario: Create a Cat Vote using the POST Method
-    Given I make the connection to the api
-    When Execute the method POST with the resource api "votes"
-    Then see that the is returned 201
-    And Check if the vote was create successfully
+  Scenario: Crea un voto usando el método
+    Given Que se especifica un entorno de prueba
+    When Se ejecuta el method para crear un voto con el recurso "votes"
+    Then Valida que retorna el código 201
+    And Verifica si el voto se creó correctamente
 
   @DeleteVote
-  Scenario: Delete a Cat Vote using the DELETE Method
-    Given I make the connection to the api
-    When Execute the method GET vote with the resource api "votes"
-    And see that the is returned 200
-    And Save a random vote
-    And Execute the method DELETE with the resource api "votes"
-    Then Code returned is 200
-    And Check if the vote was delete successfully
+  Scenario: Borrar un voto usando el método
+    Given Que se especifica un entorno de prueba
+    When Se ejecuta el método para obtener los votos en la APICAT con el recurso "votes"
+    And Valida que retorna el código 200
+    And Guarda un voto aleatorio
+    And Ejecuta el método con el recurso "votes"
+    Then Valida que retorna código 200
+    And Verifica si el voto fue borrado correctamente
 
   @DeleteCreatedVote
-  Scenario: Remove a Created Cat Vote using the DELETE Method
-    Given I make the connection to the api
-    When Execute the method POST with the resource api "votes"
-    And see that the is returned 201
-    And Check if the vote was create successfully
-    And Save the vote ID was create successfully
-    And Execute the method DELETE with the resource api "votes"
-    Then Code returned is 200
-    And Check if the vote was delete successfully
+  Scenario: Eliminar un Voto de Gato Creado utilizando el Método
+    Given Que se especifica un entorno de prueba
+    When Se ejecuta el method para crear un voto con el recurso "votes"
+    And Valida que retorna el código 201
+    And Verifica si el voto se creó correctamente
+    And Guarda el ID del voto que se creó exitosamente
+    And Ejecuta el método con el recurso "votes"
+    Then Valida que retorna código 200
+    And Verifica si el voto fue borrado correctamente
 
   @UHPDeleteVote
-  Scenario: Attempt to Delete a Non-existent Cat Vote using the DELETE Method
-    Given I make the connection to the api
-    When Execute the method DELETE with the resource api "votes"
-    Then Code returned is 404
+  Scenario: Intentar Eliminar un Voto Inexistente utilizando el Método
+    Given Que se especifica un entorno de prueba
+    When Ejecuta el método con el recurso "votes"
+    Then Valida que retorna el código 404
