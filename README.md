@@ -3,7 +3,7 @@
 Se crean las dependencias en el build.gradle
 
 
-Las clases  implementan la interfaz Task, que es parte del patrón de diseño Screenplay utilizado en Serenity BDD para la automatización de pruebas.
+Las clases  implementan la interfaz Task, parte del patrón de diseño Screenplay utilizado en Serenity BDD para la automatización de pruebas.
 
 El objetivo principal de esta clase es realizar una solicitud GET a la API https://thecatapi.com/ para obtener información sobre razas, categorías y votos de gatos.
 
